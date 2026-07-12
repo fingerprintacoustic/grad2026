@@ -614,20 +614,20 @@ function initFirebase(){
 function getTrash(){ return trash; }
 async function pushTrash(entry){
   trash.unshift({...entry, deletedAt: Date.now()});
-  if(dbDocRef) await dbDocRef.update({trash}).catch(()=>{});
+  if(dbDocRef) await dbDocRef.set({trash}, {merge:true}).catch(err=>{ console.error(err); alert('Save failed: ' + err.message); });
 }
 async function saveTrashList(){
-  if(dbDocRef) await dbDocRef.update({trash}).catch(()=>{});
+  if(dbDocRef) await dbDocRef.set({trash}, {merge:true}).catch(err=>{ console.error(err); alert('Save failed: ' + err.message); });
 }
 
 async function saveGrads(){
-  if(dbDocRef) await dbDocRef.update({grads}).catch(()=>{});
+  if(dbDocRef) await dbDocRef.set({grads}, {merge:true}).catch(err=>{ console.error(err); alert('Save failed: ' + err.message); });
 }
 async function saveMusic(){
-  if(dbDocRef) await dbDocRef.update({music: MUSIC}).catch(()=>{});
+  if(dbDocRef) await dbDocRef.set({music: MUSIC}, {merge:true}).catch(err=>{ console.error(err); alert('Save failed: ' + err.message); });
 }
 async function saveSchedule(){
-  if(dbDocRef) await dbDocRef.update({schedule}).catch(()=>{});
+  if(dbDocRef) await dbDocRef.set({schedule}, {merge:true}).catch(err=>{ console.error(err); alert('Save failed: ' + err.message); });
 }
 
 function renderSchedule(){
